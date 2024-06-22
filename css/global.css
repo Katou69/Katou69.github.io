@@ -1,0 +1,25 @@
+table {
+    width: 100vw;
+}
+
+table tfoot {
+    font-weight: bold;
+}
+
+
+table tr:nth-child(even) {
+    background-color: #e0e6ba;
+}
+
+table tr:nth-child(odd) {
+    background-color: #cee2ff;
+}
+
+
+td{
+    text-align: center;
+}
+
+th{
+    background-color: rgb(244, 192, 125);
+}
