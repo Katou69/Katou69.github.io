@@ -3,7 +3,8 @@
 
 <head>
     <title>Car Accessories</title>
-    <link rel = "stylesheet" href="../css/global.css">
+    <link rel = "stylesheet" href="./css/global.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Car Accessories</h1>
@@ -55,26 +56,20 @@
     <script>
         var totalPrice = 0
         function addToProductList() {
-            var accessorySelect = document.getElementById("accessory");
-            var accessoryOption = accessorySelect.options[accessorySelect.selectedIndex];
-            var accessoryName = accessoryOption.text;
-            var accessoryPrice = accessoryOption.value;
-            var amountInput = document.getElementById("amount");
-            var amount = amountInput.value;
- 
-            var productList = document.getElementById("productList");
-            var newRow = productList.insertRow(-1);
-            var accessoryCell = newRow.insertCell(0);
-            var amountCell = newRow.insertCell(1);
-            var priceCell = newRow.insertCell(2);
- 
-            accessoryCell.innerHTML = accessoryName;
-            amountCell.innerHTML = amount;
-            priceCell.innerHTML = accessoryPrice * amount;
- 
+            var accessoryName = $("#accessory option:selected").text(); // Get the text of the selected option
+            var accessoryPrice = parseFloat($("#accessory").val()); // Get the value of the selected option and convert to a float
+            var amount = parseInt($("#amount").val()); // Get the value of the amount input and convert to an integer
+
+            // Create a new row and append it to the productList tbody
+            var newRow = $("<tr></tr>");
+            newRow.append("<td>" + accessoryName + "</td>");
+            newRow.append("<td>" + amount + "</td>");
+            newRow.append("<td>" + (accessoryPrice * amount).toFixed(2) + "</td>");
+            $("#productList").append(newRow);
+
             // Update the total price
-            totalPrice += accessoryPrice * amount
-            document.getElementById("totalPrice").innerHTML = totalPrice;
+            totalPrice += accessoryPrice * amount;
+            $("#totalPrice").text(totalPrice.toFixed(2));
             calculateVAT();
         }
 
@@ -82,12 +77,11 @@
             var vatRate = 0.07; // 7% VAT rate
             var vatAmount = totalPrice * vatRate;
             var grossPrice = totalPrice + vatAmount;
-            document.getElementById("vatAmount").textContent = vatAmount.toFixed(2);
-            document.getElementById("grossPrice").textContent = grossPrice.toFixed(2);
-
+            $("#vatAmount").text(vatAmount.toFixed(2));
+            $("#grossPrice").text(grossPrice.toFixed(2));
         }
- 
         
+
     </script>
 </body>
  
