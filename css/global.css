@@ -1,5 +1,6 @@
-table {
-    width: 100vw;
+image {
+    width: 350px;
+    height: 230px;
 }
 
 table tfoot {
@@ -23,3 +24,4 @@ td{
 th{
     background-color: rgb(244, 192, 125);
 }
+
